@@ -10,7 +10,7 @@ public class FileCreator {
 
   public static void create() throws IOException {
     //Size in Gbs of my file that I want
-    double wantedSize = Double.parseDouble(System.getProperty("size", "1.5"));
+    double wantedSize = Double.parseDouble(System.getProperty("size", "1"));
 
     Random random = new Random();
     File file = new File("test.txt");
@@ -20,10 +20,21 @@ public class FileCreator {
     while (true) {
       String sep = "";
       for (int i = 0; i < 100; i++) {
-        int number = random.nextInt(1000) + 1;
+        int number;
+        if (i % 20 == 0) {
+
+          number =  123;
+        } else {
+
+          number = random.nextInt(1000) + 1;
+        }
         writer.print(sep);
         writer.print(number / 1e3);
-        sep = " ";
+        if (i % 10 == 0) {
+          sep = " \n";
+        } else {
+          sep = " ";
+        }
       }
       writer.println();
       //Check to see if the current size is what we want it to be
